@@ -103,6 +103,8 @@ DBI::TypeUtil.register_conversion("default") do |obj|
         obj.to_s("F")
     when ::Numeric
         obj.to_s
+    when Array
+        obj.collect { |v| DBI::TypeUtil.convert("default", v) }.join(", ")
     else
         "'#{obj.to_s}'"
     end
